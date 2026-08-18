@@ -73,16 +73,41 @@ scanned PDF sometimes carries.
 
 ---
 
-## Configuration UI
+## What's in this repo
 
-Users define the capture schema without touching code:
+**This is an architecture reference and a findings document, not a deployable solution.**
+
+| Included | Not included |
+|---|---|
+| Text extraction and scan-detection module (`src/documentText.js`) | A running application |
+| Prompt builders for text and vision paths (`prompts/extraction.js`) | The configuration UI — **designed, not built** |
+| The AI Builder findings, in full | Dataverse tables or solution |
+| Configuration data model | Power Automate flows |
+
+The two JavaScript modules are complete and readable, but there is **no build, no tests and no
+`package.json`** — they are reference implementations to lift into your own project, not a library
+to install.
+
+**The configuration UI described in [docs/configuration.md](docs/configuration.md) is a design.**
+The data model and prompt-assembly approach are specified; the UI itself is not in this repo.
+
+**What is genuinely verified** is the findings section below. Those behaviours were established by
+testing against AI Builder and each one cost real time to find. That is the part of this repo worth
+reading.
+
+---
+
+## Configuration model
+
+Users define the capture schema without touching code — **as designed**; see
+[docs/configuration.md](docs/configuration.md) for the data model:
 
 - **Fields** — name, type, whether required
 - **Prompt fragment** per field, describing what to look for
 - **Validation** — value ranges, allowed values, formats
 - **Routing signals** — fields whose values direct the record downstream
 
-Stored in Dataverse, so a new document type is configuration rather than a release.
+Stored in Dataverse, so a new document type would be configuration rather than a release.
 
 ---
 
