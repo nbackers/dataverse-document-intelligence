@@ -1,7 +1,18 @@
+<div align="center">
+
 # Dataverse Document Intelligence
 
-Prompt-driven document extraction into Dataverse, with a **user-defined capture schema**, automatic
-handling of scanned documents, and a human validation gate before anything is written.
+**Prompt-driven document extraction with a user-defined capture schema**
+
+[![AI Builder](https://img.shields.io/badge/AI_Builder-742774?style=flat-square)](#)
+[![Findings](https://img.shields.io/badge/4_undocumented_findings-important?style=flat-square)](docs/ai-builder-findings.md)
+[![Vision fallback](https://img.shields.io/badge/scanned_PDFs-vision_fallback-0F6CBD?style=flat-square)](#)
+[![Licence](https://img.shields.io/badge/licence-MIT-blue?style=flat-square)](LICENSE)
+
+</div>
+
+Extraction into Dataverse with automatic handling of scanned documents, and a human validation gate
+before anything is written.
 
 ---
 
@@ -39,34 +50,30 @@ document type is a development cycle.
 
 ## How it works
 
+```mermaid
+flowchart TD
+    A["Upload DOCX / PDF / TXT"] --> B["Text extraction<br/><small>mammoth (DOCX) · pdf.js (PDF)</small>"]
+    B --> C{"Text layer<br/>>= 200 chars?"}
+
+    C -->|yes| D["Text prompt"]
+    C -->|"no, it's a scan"| E["Rasterise pages<br/>to one PNG"]
+    E --> F["Vision prompt"]
+
+    D --> G["Structured fields<br/>+ confidence<br/>+ missingInformation"]
+    F --> G
+
+    G --> H{"HUMAN VALIDATES"}
+    H --> I[("Dataverse record<br/>+ audit entry")]
+
+    style C fill:#742774,stroke:#4A184A,color:#fff
+    style E fill:#0F6CBD,stroke:#0A4E8A,color:#fff
+    style F fill:#0F6CBD,stroke:#0A4E8A,color:#fff
+    style H fill:#D93F0B,stroke:#9E2E08,color:#fff
+    style I fill:#0078D4,stroke:#005A9E,color:#fff
 ```
-   Upload DOCX / PDF / TXT
-              │
-              ▼
-      Text extraction              mammoth (DOCX) | pdf.js (PDF)
-              │
-              ▼
-      Text layer >= 200 chars?
-              │
-      ┌───────┴────────┐
-      │ yes            │ no  (it's a scan)
-      ▼                ▼
-  Text prompt     Rasterise pages to one PNG
-      │                │
-      │                ▼
-      │           Vision prompt
-      └───────┬────────┘
-              ▼
-   Structured fields + confidence + missingInformation
-              │
-              ▼
-      ┌───────────────────┐
-      │  HUMAN VALIDATES  │   ← nothing is written before this
-      └───────────────────┘
-              │
-              ▼
-      Dataverse record + audit entry
-```
+
+> Nothing is written to Dataverse before the human validation step. The AI never files a record on
+> its own.
 
 The 200-character threshold is what distinguishes a real text layer from the stray whitespace a
 scanned PDF sometimes carries.
