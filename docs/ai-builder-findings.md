@@ -2,8 +2,7 @@
 
 Behaviours established by testing, not documentation. Each cost real time to find.
 
-Established against AI Builder custom prompts (GPT) in 2026. Verify before relying on any of it —
-and please open an issue if something has changed.
+Established against AI Builder custom prompts (GPT) in 2026. Verify before relying on any of it - and please open an issue if something has changed.
 
 ---
 
@@ -21,7 +20,7 @@ itself was confirmed correct against the published `PredictionSchema`.
 The `source` parameter does not bind for a token issued to anything other than the Power Apps
 client. This is not a payload problem and cannot be worked around by changing the request.
 
-**Consequence.** AI Builder prompts are the right answer *in* Power Apps — solution-portable,
+**Consequence.** AI Builder prompts are the right answer *in* Power Apps - solution-portable,
 governed by the platform, no separate Azure dependency. They cannot be used from a local dev server,
 a console app, or any external caller. If you need to run outside the host, you need a second
 runtime with the same prompt text.
@@ -75,7 +74,6 @@ Passing a PDF to a document/image input returns:
 Hence rasterising in the browser before the call.
 
 ### Rasterisation details that matter
-
 - **One tall PNG, not one image per page.** Keeps it to a single prompt call.
 - **PNG, not JPEG.** JPEG artefacts land on the thin strokes of small print and cost accuracy.
 - **Fill the canvas white first.** Transparent regions flatten to black on export and take the text
@@ -85,7 +83,7 @@ Hence rasterising in the browser before the call.
 
 ## 6. `GetPredictionSchema` returns 404 for GPT prompts
 
-The obvious way to discover a prompt's expected input shape doesn't work here — it is for form
+The obvious way to discover a prompt's expected input shape doesn't work here - it is for form
 processing models only.
 
 Shape has to be established by probing.
@@ -102,7 +100,7 @@ The real error is in the **flow run's action output**.
 A Power Apps triggered flow can only be run from the app, which makes iteration slow.
 
 Build a probe flow on a **recurrence** trigger instead. It can be run on demand, and several payload
-variants can sit in one flow as separate actions — so a single run reports on all of them at once.
+variants can sit in one flow as separate actions - so a single run reports on all of them at once.
 
 That turns a multi-hour bisect into one run.
 

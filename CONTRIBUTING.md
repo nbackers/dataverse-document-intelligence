@@ -4,7 +4,6 @@ The AI Builder findings in this repo were established by testing, against the pl
 Platform behaviour changes. **Confirmation or correction is the most valuable contribution here.**
 
 ## Especially useful
-
 - **Whether the `Predict` limitation still holds.** If the bound `Predict` action can now be called
   outside the Power Apps host, that changes the architecture and the dual-runtime approach becomes
   unnecessary.
@@ -16,7 +15,7 @@ Platform behaviour changes. **Confirmation or correction is the most valuable co
   welcome, with the reasoning.
 - **Extraction accuracy patterns.** Prompt fragment styles that measurably improved a field.
 
-When reporting, state the date and, if you can, the region — some behaviours differ.
+When reporting, state the date and, if you can, the region - some behaviours differ.
 
 ## Pull requests
 
@@ -24,7 +23,7 @@ When reporting, state the date and, if you can, the region — some behaviours d
 2. Keep the verified/unverified distinction accurate. If you add a claim, say how it was established.
 3. Never commit real documents, extracted content, tenant identifiers or environment URLs. Use
    synthetic samples.
-4. If you change the prompt definitions, keep both runtimes in step — the point of a shared
+4. If you change the prompt definitions, keep both runtimes in step - the point of a shared
    definition is that they cannot drift.
 5. Explain *why* in comments where behaviour is non-obvious. Most of this code exists to work around
    something undocumented, and a future reader needs to know which lines are load-bearing.
@@ -32,7 +31,6 @@ When reporting, state the date and, if you can, the region — some behaviours d
 ## Sample documents
 
 Never contribute a real document. Generate synthetic samples that exercise the paths:
-
 - A native-text PDF
 - A scanned/image-only PDF, to exercise the vision path
 - A document missing several expected fields, to exercise `missingInformation`

@@ -59,7 +59,7 @@ One row per document processed, for audit.
 | Target record | The record created on confirmation |
 
 Keeping the raw response matters. When someone questions a value months later, the answer is
-whether the model got it wrong or the reviewer approved it wrongly — and only the raw response
+whether the model got it wrong or the reviewer approved it wrongly - and only the raw response
 settles that.
 
 ---
@@ -87,7 +87,7 @@ Return JSON:
 }
 ```
 
-Because the wording is generated from configuration, adding a field cannot break the parsing — the
+Because the wording is generated from configuration, adding a field cannot break the parsing - the
 output shape is fixed and only the field list varies.
 
 ## Writing a good prompt fragment
@@ -113,7 +113,7 @@ isn't there**. That last part is what stops a model inventing a plausible number
 
 ## Routing signals
 
-Fields marked as routing signals direct the record downstream — which team reviews it, which
+Fields marked as routing signals direct the record downstream - which team reviews it, which
 process it enters, whether it needs specialist attention.
 
 These deserve the most carefully written fragments, because a wrong value doesn't just make a field
@@ -125,7 +125,6 @@ model answers reliably, where *what category is this* is not.
 ## Validation form
 
 Generated from the capture field configuration:
-
 - Fields in display order, with their labels
 - Values pre-filled from the extraction
 - **Low-confidence values highlighted** rather than presented as equally reliable
@@ -140,7 +139,7 @@ Nothing is written to the target table until submitted.
 1. Create the document type row and write the preamble.
 2. Add capture fields with prompt fragments.
 3. Test against three or four real documents, including a scanned one.
-4. Review the `confidence` values — anything consistently low means the fragment needs work, not
+4. Review the `confidence` values - anything consistently low means the fragment needs work, not
    that the model is incapable.
 5. Activate.
 

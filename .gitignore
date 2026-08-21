@@ -11,7 +11,7 @@ node_modules/
 packages/
 .venv/
 
-# Secrets and keys — never commit
+# Secrets and keys - never commit
 *.snk
 *.pfx
 *.p12

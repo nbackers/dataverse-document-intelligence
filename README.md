@@ -13,12 +13,12 @@ hardcoded. Change the fields you want and you're editing prompts, flows and tabl
 Three failures show up in nearly every build:
 
 **Scanned documents silently return nothing.** A scanned PDF is a picture of a page in a PDF
-wrapper — it has no text layer. Text extraction returns an empty string, the prompt receives
+wrapper - it has no text layer. Text extraction returns an empty string, the prompt receives
 nothing, and the model dutifully produces a well-formed result with every field empty. Nothing
 errors. The failure is invisible until someone checks a record by hand.
 
 **AI writes straight to the system of record.** No confidence, no indication of what was missing, no
-human checkpoint. Governance teams reject this, and they're right to — an extraction that is 90%
+human checkpoint. Governance teams reject this, and they're right to - an extraction that is 90%
 accurate across 23 fields is wrong somewhere on nearly every document.
 
 **The schema is somebody's code.** Business users can't change what gets captured, so every new
@@ -80,12 +80,12 @@ scanned PDF sometimes carries.
 | Included | Not included |
 |---|---|
 | Text extraction and scan-detection module (`src/documentText.js`) | A running application |
-| Prompt builders for text and vision paths (`prompts/extraction.js`) | The configuration UI — **designed, not built** |
+| Prompt builders for text and vision paths (`prompts/extraction.js`) | The configuration UI - **designed, not built** |
 | The AI Builder findings, in full | Dataverse tables or solution |
 | Configuration data model | Power Automate flows |
 
 The two JavaScript modules are complete and readable, but there is **no build, no tests and no
-`package.json`** — they are reference implementations to lift into your own project, not a library
+`package.json`** - they are reference implementations to lift into your own project, not a library
 to install.
 
 **The configuration UI described in [docs/configuration.md](docs/configuration.md) is a design.**
@@ -99,13 +99,12 @@ reading.
 
 ## Configuration model
 
-Users define the capture schema without touching code — **as designed**; see
+Users define the capture schema without touching code - **as designed**; see
 [docs/configuration.md](docs/configuration.md) for the data model:
-
-- **Fields** — name, type, whether required
+- **Fields** - name, type, whether required
 - **Prompt fragment** per field, describing what to look for
-- **Validation** — value ranges, allowed values, formats
-- **Routing signals** — fields whose values direct the record downstream
+- **Validation** - value ranges, allowed values, formats
+- **Routing signals** - fields whose values direct the record downstream
 
 Stored in Dataverse, so a new document type would be configuration rather than a release.
 
@@ -119,7 +118,7 @@ part of the repo.
 ### 1. A document input is an object, not a string
 
 `type: 'document'` on a prompt input produces `{ base64Encoded: ... }` in the run data
-specification — not a plain `Base64String`. Passing raw base64 to the input itself does nothing
+specification - not a plain `Base64String`. Passing raw base64 to the input itself does nothing
 useful.
 
 ### 2. `additionalContext` is not the file channel
@@ -127,7 +126,7 @@ useful.
 AI Builder adds an optional `additionalContext` `Base64String` to **every** prompt specification,
 including text-only ones. It looks exactly like where a file should go.
 
-It is not. The prompt never reads it, so extraction succeeds and silently returns nothing — the
+It is not. The prompt never reads it, so extraction succeeds and silently returns nothing - the
 worst possible failure mode, because there is no error to investigate.
 
 ### 3. The value has to be binary
@@ -137,13 +136,12 @@ sniffs base64 text rather than an image. A valid one-pixel PNG comes back as *"u
 the mimetype"*.
 
 Wrap the trigger value in `base64ToBinary()`. It must be applied to a **trigger value**, not a
-literal — a Logic Apps expression is capped at 8192 characters and a page of scan is several
+literal - a Logic Apps expression is capped at 8192 characters and a page of scan is several
 hundred thousand.
 
 ### 4. PDF is rejected outright
 
-The prompt answers *"You uploaded an unsupported image"* and lists `png`, `jpeg`, `gif`, `webp` —
-which contradicts the AI Builder documentation.
+The prompt answers *"You uploaded an unsupported image"* and lists `png`, `jpeg`, `gif`, `webp` - which contradicts the AI Builder documentation.
 
 So scanned PDFs are rasterised in the browser first: each page drawn to a canvas and stacked into
 one tall PNG, keeping it to a single prompt call. **PNG not JPEG**, because JPEG artefacts land on
@@ -155,8 +153,7 @@ and take the text with them. Capped at eight pages.
 The app only ever sees a **502 BadGateway** from the connector gateway. The real message is in the
 flow run's action output.
 
-`GetPredictionSchema`, which would describe the input directly, returns **404 for GPT prompts** —
-it is for form processing models only.
+`GetPredictionSchema`, which would describe the input directly, returns **404 for GPT prompts** - it is for form processing models only.
 
 To test payload variants, trigger the flow on a **recurrence** rather than from Power Apps. A Power
 Apps triggered flow can only be run from the app; a scheduled one can be run on demand, and several
@@ -175,7 +172,7 @@ The prompt wording lives once and is used by two runtimes:
 
 Because the wording is shared, what you develop against and what ships cannot drift.
 
-### Why both — a documented limitation
+### Why both - a documented limitation
 
 AI Builder prompts are the right answer in-platform, but **cannot be invoked from outside the Power
 Apps host**. The bound `Predict` action rejects every call with:
@@ -198,9 +195,8 @@ Hence the second runtime for local development.
 Nothing is written to Dataverse until a person submits. The AI never files a record on its own.
 
 The extraction returns, alongside the fields:
-
-- **`confidence`** — so low-certainty fields can be highlighted rather than trusted
-- **`missingInformation`** — what the document did not contain, so the reviewer knows what to chase
+- **`confidence`** - so low-certainty fields can be highlighted rather than trusted
+- **`missingInformation`** - what the document did not contain, so the reviewer knows what to chase
 
 Scanned documents are flagged on the form, because extraction from pages the model read itself
 deserves closer checking than a native text layer.
@@ -223,9 +219,8 @@ and the audit trail records both.
 ---
 
 ## Limitations
-
 - Rasterisation capped at **eight pages** per document.
-- Scan detection uses a 200-character threshold — a document with a very short real text layer will
+- Scan detection uses a 200-character threshold - a document with a very short real text layer will
   be treated as a scan.
 - AI Builder prompts cannot be called outside the Power Apps host (see above).
 - Handwriting is not reliably extracted.
@@ -233,4 +228,4 @@ and the audit trail records both.
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
