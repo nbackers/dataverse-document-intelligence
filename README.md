@@ -7,6 +7,7 @@
 [![AI Builder](https://img.shields.io/badge/AI_Builder-742774?style=flat-square)](#)
 [![Findings](https://img.shields.io/badge/4_undocumented_findings-important?style=flat-square)](docs/ai-builder-findings.md)
 [![Vision fallback](https://img.shields.io/badge/scanned_PDFs-vision_fallback-0F6CBD?style=flat-square)](#)
+[![Sample code](https://img.shields.io/badge/sample_code-not_production_ready-orange?style=flat-square)](#disclaimer)
 [![Licence](https://img.shields.io/badge/licence-MIT-blue?style=flat-square)](LICENSE)
 
 </div>
@@ -232,6 +233,25 @@ and the audit trail records both.
 - AI Builder prompts cannot be called outside the Power Apps host (see above).
 - Handwriting is not reliably extracted.
 - Findings were established against AI Builder as at 2026 and may change.
+
+---
+
+## Disclaimer
+
+This is **sample code**, published as a reusable reference pattern.
+
+- Provided **as is**, without warranty of any kind, express or implied. See [LICENSE](LICENSE).
+- **Not production ready.** Treat it as a starting point, not a finished solution. Review, test and
+  harden it against your own requirements before any real use.
+- **Not an official Microsoft product** and not affiliated with, endorsed by, or supported by
+  Microsoft. Product names are trademarks of their respective owners.
+- **No support commitment.** Issues and pull requests are welcome, but nothing here carries an SLA.
+- Some behaviours documented here rely on **undocumented or preview platform features** that can
+  change without notice. Verify against current documentation before depending on them.
+- You are responsible for security, privacy, licensing and regulatory compliance in your own
+  environment.
+
+---
 
 ## Licence
 
