@@ -1,0 +1,57 @@
+{
+  "documentType": {
+    "name": "supplier agreement",
+    "preamble": "This is a commercial agreement between an organisation and a supplier. Key terms may be in schedules or annexes rather than the main body. Where a schedule and the body conflict, prefer the schedule and lower the confidence."
+  },
+  "fields": [
+    {
+      "name": "supplierName",
+      "type": "text",
+      "isRequired": true,
+      "promptFragment": "The legal name of the supplier party, as defined in the parties clause."
+    },
+    {
+      "name": "effectiveDate",
+      "type": "date",
+      "isRequired": true,
+      "promptFragment": "The commencement or effective date in ISO format. If it is defined as 'the date of the last signature', return null."
+    },
+    {
+      "name": "expiryDate",
+      "type": "date",
+      "promptFragment": "The end date of the initial term in ISO format. If the term is expressed as a duration, return null rather than calculating it."
+    },
+    {
+      "name": "contractValue",
+      "type": "currency",
+      "promptFragment": "The total contract value including options and extensions, as a number. If the value is a rate rather than a total, return null."
+    },
+    {
+      "name": "autoRenews",
+      "type": "boolean",
+      "promptFragment": "True only if the agreement renews automatically unless notice is given."
+    },
+    {
+      "name": "noticePeriodDays",
+      "type": "number",
+      "promptFragment": "The notice period for termination for convenience, in days. Convert weeks or months only if the document states the equivalent in days; otherwise return null."
+    },
+    {
+      "name": "liabilityCapped",
+      "type": "boolean",
+      "promptFragment": "True if the supplier's liability is capped by an amount or a multiple of fees."
+    },
+    {
+      "name": "processesPersonalData",
+      "type": "boolean",
+      "promptFragment": "True if the supplier will process personal information on the organisation's behalf, for example a data processing clause or schedule exists.",
+      "isRoutingSignal": true,
+      "routingNote": "sends the record to privacy review."
+    },
+    {
+      "name": "governingLaw",
+      "type": "text",
+      "promptFragment": "The jurisdiction named in the governing law clause."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+name: Verification result
+description: Report whether an AI Builder finding still holds
+labels: [verification]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The findings are dated and the platform changes. A dated re-test, either way, is the most
+        useful contribution here. **Never attach a real document.**
+  - type: dropdown
+    id: finding
+    attributes:
+      label: Which finding did you test?
+      options:
+        - "1. Predict cannot be called outside the Power Apps host"
+        - "2. A document input is an object, not a string"
+        - "3. additionalContext is not the file channel"
+        - "4. The value must be binary, not a base64 string"
+        - "5. PDF rejected as a prompt image input"
+        - "6. GetPredictionSchema returns 404 for GPT prompts"
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - "Still holds"
+        - "No longer holds"
+        - "Holds with differences"
+    validations:
+      required: true
+  - type: input
+    id: when-where
+    attributes:
+      label: Date and region tested
+  - type: textarea
+    id: notes
+    attributes:
+      label: Detail
+      render: text

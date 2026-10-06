@@ -1,0 +1,37 @@
+name: Bug report
+description: A module or test does not behave as described
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Never attach a real document or extracted content.** Use a synthetic sample.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what occurred instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - "Text extraction / scan detection"
+        - "Rasterisation"
+        - "Prompt assembly or config validation"
+        - "Output validation"
+        - "Documentation"
+    validations:
+      required: true
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      placeholder: e.g. 20.11
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or failing test
+      render: text

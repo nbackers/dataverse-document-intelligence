@@ -1,0 +1,53 @@
+{
+  "documentType": {
+    "name": "new starter form",
+    "preamble": "This is a completed new starter or onboarding form. It may be handwritten and scanned. Only extract what the person has written; ignore printed instructions and example values on the form."
+  },
+  "fields": [
+    {
+      "name": "legalName",
+      "type": "text",
+      "isRequired": true,
+      "promptFragment": "The person's full legal name as written. Do not correct spelling."
+    },
+    {
+      "name": "preferredName",
+      "type": "text",
+      "promptFragment": "The preferred or known-as name, if one is given."
+    },
+    {
+      "name": "startDate",
+      "type": "date",
+      "isRequired": true,
+      "promptFragment": "The employment start date in ISO format."
+    },
+    {
+      "name": "employmentType",
+      "type": "choice",
+      "allowedValues": [
+        "Full time",
+        "Part time",
+        "Casual",
+        "Contractor"
+      ],
+      "promptFragment": "The employment type that is ticked or written."
+    },
+    {
+      "name": "position",
+      "type": "text",
+      "promptFragment": "The job title or position."
+    },
+    {
+      "name": "requiresDeviceAccess",
+      "type": "boolean",
+      "promptFragment": "True if the form requests a laptop, phone or system access.",
+      "isRoutingSignal": true,
+      "routingNote": "triggers an IT provisioning task."
+    },
+    {
+      "name": "emergencyContactProvided",
+      "type": "boolean",
+      "promptFragment": "True if an emergency contact name and number are both filled in. Do not extract the contact's details."
+    }
+  ]
+}

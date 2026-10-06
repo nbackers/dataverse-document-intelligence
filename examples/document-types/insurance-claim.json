@@ -1,0 +1,55 @@
+{
+  "documentType": {
+    "name": "property insurance claim form",
+    "preamble": "This is a claim form lodged by a policyholder. The incident description is the claimant's account; extract it, do not summarise or judge it."
+  },
+  "fields": [
+    {
+      "name": "policyNumber",
+      "type": "text",
+      "isRequired": true,
+      "promptFragment": "The policy number exactly as written."
+    },
+    {
+      "name": "incidentDate",
+      "type": "date",
+      "isRequired": true,
+      "promptFragment": "The date the loss or damage occurred, in ISO format. Not the date the form was signed."
+    },
+    {
+      "name": "incidentType",
+      "type": "choice",
+      "allowedValues": [
+        "Storm",
+        "Flood",
+        "Fire",
+        "Theft",
+        "Accidental damage",
+        "Other"
+      ],
+      "promptFragment": "The type of incident that is ticked or stated. If more than one applies, choose the one described as the cause and lower the confidence."
+    },
+    {
+      "name": "incidentDescription",
+      "type": "text",
+      "promptFragment": "The claimant's description of what happened, verbatim. Do not paraphrase."
+    },
+    {
+      "name": "estimatedLoss",
+      "type": "currency",
+      "promptFragment": "The claimant's estimate of the loss as a number. Return null if not given; never estimate it."
+    },
+    {
+      "name": "policeReportNumber",
+      "type": "text",
+      "promptFragment": "A police or event report number, if one is given."
+    },
+    {
+      "name": "propertyUninhabitable",
+      "type": "boolean",
+      "promptFragment": "True if the claimant states the property cannot be lived in.",
+      "isRoutingSignal": true,
+      "routingNote": "sends the claim to urgent assistance."
+    }
+  ]
+}

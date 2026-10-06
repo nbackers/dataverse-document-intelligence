@@ -1,0 +1,70 @@
+{
+  "documentType": {
+    "name": "supplier invoice",
+    "preamble": "This is an invoice issued by a supplier. It may be a native PDF or a scan. Amounts may appear in several places (line items, subtotal, tax, total); the total payable is the one that matters."
+  },
+  "fields": [
+    {
+      "name": "supplierName",
+      "type": "text",
+      "isRequired": true,
+      "promptFragment": "The legal name of the business issuing the invoice, as printed in the header or remittance section. Not the customer's name."
+    },
+    {
+      "name": "supplierTaxId",
+      "type": "text",
+      "promptFragment": "The supplier's tax or business registration number exactly as printed (for example ABN, VAT or EIN). Return null if none is printed."
+    },
+    {
+      "name": "invoiceNumber",
+      "type": "text",
+      "isRequired": true,
+      "promptFragment": "The invoice number or reference. Not a purchase order number, account number or customer number."
+    },
+    {
+      "name": "invoiceDate",
+      "type": "date",
+      "isRequired": true,
+      "promptFragment": "The date the invoice was issued, in ISO format (YYYY-MM-DD). Not the due date or the delivery date."
+    },
+    {
+      "name": "dueDate",
+      "type": "date",
+      "promptFragment": "The payment due date in ISO format. If only payment terms are given (for example 'Net 30') return null rather than calculating a date."
+    },
+    {
+      "name": "purchaseOrder",
+      "type": "text",
+      "promptFragment": "The customer purchase order number referenced on the invoice, if any."
+    },
+    {
+      "name": "currency",
+      "type": "choice",
+      "allowedValues": [
+        "AUD",
+        "USD",
+        "EUR",
+        "GBP",
+        "NZD",
+        "Other"
+      ],
+      "promptFragment": "The currency of the amounts. Use Other if it is stated but not in the list. Return null if no currency is shown."
+    },
+    {
+      "name": "totalAmount",
+      "type": "currency",
+      "isRequired": true,
+      "promptFragment": "The total amount payable including tax, as a number without currency symbols. If a credit or amount already paid is deducted, return the final balance due."
+    },
+    {
+      "name": "taxAmount",
+      "type": "currency",
+      "promptFragment": "The total tax amount as a number. Return null if tax is not shown separately; do not calculate it."
+    },
+    {
+      "name": "isCreditNote",
+      "type": "boolean",
+      "promptFragment": "True if the document is a credit note or adjustment rather than a request for payment."
+    }
+  ]
+}

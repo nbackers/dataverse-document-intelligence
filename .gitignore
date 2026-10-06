@@ -1,0 +1,42 @@
+# Build output
+bin/
+obj/
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+packages/
+.venv/
+
+# Secrets and keys - never commit
+*.snk
+*.pfx
+*.p12
+*.pem
+*.key
+.env
+.env.*
+appsettings.Development.json
+secrets.json
+*.publishsettings
+
+# Power Platform local artefacts
+.pac/
+*.msapp.bak
+
+# Editor / OS
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+Thumbs.db
+.DS_Store
+
+# Local scratch
+scratch/
+temp/
+*.local.*

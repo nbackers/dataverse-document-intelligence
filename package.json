@@ -1,0 +1,14 @@
+{
+  "name": "dataverse-document-intelligence",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Reference modules for prompt-driven document extraction: scan detection, rasterisation, prompt assembly and output validation.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
